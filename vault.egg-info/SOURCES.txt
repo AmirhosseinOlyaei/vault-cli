@@ -1,0 +1,10 @@
+pyproject.toml
+vault/__init__.py
+vault/cli.py
+vault/crypto.py
+vault.egg-info/PKG-INFO
+vault.egg-info/SOURCES.txt
+vault.egg-info/dependency_links.txt
+vault.egg-info/entry_points.txt
+vault.egg-info/requires.txt
+vault.egg-info/top_level.txt

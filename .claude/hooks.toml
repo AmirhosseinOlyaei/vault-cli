@@ -1,0 +1,7 @@
+[[on_stop]]
+run = "find /tmp -name 'vault-temp-*' -type f -delete 2>/dev/null; true"
+description = "Clean up temporary vault files"
+
+[[on_stop]]
+run = "find . -name '__pycache__' -type d -exec rm -rf {} + 2>/dev/null; true"
+description = "Clean up Python cache"
