@@ -1,0 +1,41 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Packaging / build artifacts
+*.egg-info/
+.eggs/
+build/
+dist/
+pip-wheel-metadata/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Test artifacts: encrypted/decrypted output files
+*.encrypted
+test_*.txt
+*_decrypted.txt
+
+# Tooling / caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.remember/
+
+# Env / secrets
+.env
+.env.*
+*.pem
+*.key
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/

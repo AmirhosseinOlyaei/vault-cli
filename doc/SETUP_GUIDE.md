@@ -126,15 +126,15 @@ vault --help
 
 ## **System Requirements Summary**
 
-| Component | What | Why |
-|-----------|------|-----|
-| **Xcode CLI Tools** | Build compiler | Compile native extensions |
-| **Homebrew** | Package manager | Install system dependencies |
-| **OpenSSL** | Crypto library | TLS/cryptography backend |
-| **pkg-config** | Library locator | Find OpenSSL installation |
-| **Python 3.9+** | Runtime | Run the application |
-| **Git** | Version control | Clone the repo |
-| **pip** | Package manager | Install Python packages |
+| Component           | What            | Why                         |
+| ------------------- | --------------- | --------------------------- |
+| **Xcode CLI Tools** | Build compiler  | Compile native extensions   |
+| **Homebrew**        | Package manager | Install system dependencies |
+| **OpenSSL**         | Crypto library  | TLS/cryptography backend    |
+| **pkg-config**      | Library locator | Find OpenSSL installation   |
+| **Python 3.9+**     | Runtime         | Run the application         |
+| **Git**             | Version control | Clone the repo              |
+| **pip**             | Package manager | Install Python packages     |
 
 ## **Time Estimate**
 
@@ -147,6 +147,7 @@ vault --help
 ## **Troubleshooting**
 
 ### OpenSSL Not Found
+
 ```bash
 # Set environment variable manually
 export OPENSSL_DIR=$(brew --prefix openssl)
@@ -155,6 +156,7 @@ source ~/.zshrc
 ```
 
 ### Python Version Mismatch
+
 ```bash
 # Check Python version
 python3 --version
@@ -164,6 +166,7 @@ pyenv local 3.12.0
 ```
 
 ### Git SSH Issues
+
 ```bash
 # Generate SSH key for GitHub
 ssh-keygen -t ed25519 -C "your@email.com"
@@ -172,6 +175,7 @@ ssh-keygen -t ed25519 -C "your@email.com"
 ```
 
 ### Cryptography Build Failure
+
 ```bash
 # Ensure all build tools are installed
 brew install openssl pkgconf
