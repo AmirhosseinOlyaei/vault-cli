@@ -6,8 +6,7 @@ from vault.crypto import encrypt_file, decrypt_file
 
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 
 app = typer.Typer(help="Secure file encryption tool")
@@ -16,7 +15,9 @@ app = typer.Typer(help="Secure file encryption tool")
 @app.command()
 def encrypt(
     filepath: str = typer.Argument(..., help="File to encrypt"),
-    password: str = typer.Option(..., prompt=True, hide_input=True, help="Encryption password"),
+    password: str = typer.Option(
+        ..., prompt=True, hide_input=True, help="Encryption password"
+    ),
 ):
     """Encrypt a file with a password."""
     try:
@@ -36,8 +37,12 @@ def encrypt(
 @app.command()
 def decrypt(
     encrypted_path: str = typer.Argument(..., help="Encrypted file"),
-    password: str = typer.Option(..., prompt=True, hide_input=True, help="Decryption password"),
-    output: str = typer.Option(None, "--output", "-o", help="Output file (default: remove .encrypted)"),
+    password: str = typer.Option(
+        ..., prompt=True, hide_input=True, help="Decryption password"
+    ),
+    output: str = typer.Option(
+        None, "--output", "-o", help="Output file (default: remove .encrypted)"
+    ),
 ):
     """Decrypt a file with a password."""
     try:

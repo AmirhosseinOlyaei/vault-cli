@@ -18,3 +18,8 @@ vault = "vault.cli:app"
 
 [tool.setuptools.packages]
 find = {}
+
+[dependency-groups]
+dev = [
+    "black>=25.11.0",
+]
