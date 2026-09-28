@@ -1,7 +1,14 @@
 import typer
 import sys
+import logging
 from pathlib import Path
 from vault.crypto import encrypt_file, decrypt_file
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 
 app = typer.Typer(help="Secure file encryption tool")
 
