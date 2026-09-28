@@ -147,6 +147,7 @@ test_decrypted.*
 .env.local
 .env.*.local
 .env.*
+!.env.example
 
 # Backup / merge-conflict leftovers
 *.bak
