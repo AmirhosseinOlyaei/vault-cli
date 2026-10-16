@@ -309,6 +309,59 @@ if [[ -f "$SECRETS_FILE" ]]; then
 fi
 ```
 
+### Use Case 4: Encrypted Obsidian Vault in a Public Git Repository
+
+When an entire directory must live inside a _public_ Git repository while its
+contents stay private (for example, an Obsidian knowledge vault tracking
+sensitive external communications), Vault alone is a poor fit: it operates on
+single files, appends `.encrypted` filenames, and breaks live editing tools.
+The right tool for this job is `git-crypt`, with Vault used to protect the
+exported git-crypt key.
+
+Real-world example: the `devarts-business` repo keeps an Obsidian vault under
+`vault/` that is pushed to a public GitHub repository.
+
+```gitattributes
+# .gitattributes (repo root, must itself stay plaintext)
+vault/** filter=git-crypt diff=git-crypt merge=git-crypt
+```
+
+```bash
+brew install git-crypt
+cd devarts-business
+git-crypt init
+
+# Verify coverage before committing
+git check-attr filter -- vault/README.md   # => filter: git-crypt
+git-crypt status -e                        # files that will be encrypted
+
+# Export the symmetric key for backups and other machines
+git-crypt export-key devarts-business.git-crypt.key
+```
+
+Committed blobs carry a `\0GITCRYPT` header followed by ciphertext; clones,
+forks, and the GitHub web UI see only opaque blobs while the working copy on
+an unlocked machine stays plaintext. Filenames remain visible, so keep note
+names non-sensitive.
+
+Key handling rules:
+
+- Never commit the key to the repo it protects: anyone who clones could then
+  decrypt everything, making the encryption moot.
+- GitHub has no readable personal-secret store (Actions secrets are
+  write-only), so the key belongs in a password manager or cloud drive.
+- Use Vault to encrypt the exported key before placing it in cloud sync:
+
+```bash
+vault encrypt devarts-business.git-crypt.key --password "<strong-password>"
+# Store devarts-business.git-crypt.key.encrypted in iCloud Drive or a
+# password manager, then securely delete the raw key.
+```
+
+To unlock a clone on a new machine: retrieve the key, `vault decrypt` it,
+then run `git-crypt unlock /path/to/devarts-business.git-crypt.key` from the
+repo root.
+
 ---
 
 ## Application Layer
